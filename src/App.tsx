@@ -55,11 +55,12 @@ function App() {
         </h2>
       ) : null}
       <div className="card">
-        <input className='numberInput'
+        <input
+          className="numberInput"
           onKeyDown={handleKeyPress}
           onChange={(e) => setNumber({ value: Number(e.target.value) })}
         />
-        <button onClick={checkPrimeHandle}>Enviar</button>
+        <button onClick={checkPrimeHandle}>Send</button>
       </div>
 
       <div className="results">
