@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai'
 
 function App() {
   const [number, setNumber] = useState<{ value: number; isPrime?: boolean }>({
@@ -67,14 +68,20 @@ function App() {
         {previousSearch.length > 0 ? (
           <div className="history">
             <h2> Previously searched numbers </h2>
-            {previousSearch.map((number, i) => {
-              return (
-                <h3 key={i}>
-                  {number.value} ({number.isPrime ? `is Prime` : `is not Prime`}
-                  )
-                </h3>
-              )
-            })}
+            <div className="historyList">
+              {previousSearch.map((number, i) => {
+                return (
+                  <div className="item" key={i}>
+                    <h2>{number.value}</h2>{' '}
+                    {number.isPrime ? (
+                      <AiOutlineCheckCircle  fill="green" size={20} />
+                    ) : (
+                      <AiOutlineCloseCircle fill="red" size={20} />
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           </div>
         ) : null}
       </div>

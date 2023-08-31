@@ -36,6 +36,15 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+svg {
+  margin-top: 3px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

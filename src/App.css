@@ -21,11 +21,25 @@
 }
 
 .history {
-  border: 2px solid white;
   padding: 12px;
   border-radius: 12px;
   height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.historyList {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 480px;
+  justify-content: space-evenly;
+  gap: 12px; 
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .numberInput {
