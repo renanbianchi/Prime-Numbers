@@ -1,17 +1,27 @@
 import { useState } from 'react'
 import './App.css'
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai'
+
 import { ErrorMessage } from './components/ErrorMessage'
 
 function App() {
   const [number, setNumber] = useState<{ value: number; isPrime?: boolean }>({
     value: 0,
   })
+
   const [previousSearch, setPreviousSearch] = useState<
     { value: number; isPrime: boolean }[]
   >([])
+
   const [isDisabled, setIsDisabled] = useState<boolean>(false)
+
   const [errorMessage, setErrorMessage] = useState<string>('')
+
+  const handleKeyPress = (e: { keyCode: number; which: number }) => {
+    if (e.keyCode === 13 || e.which === 13) {
+      isDisabled ? null : checkPrimeHandle()
+    }
+  }
 
   const checkData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value.replace(/[^\d,]/g, ''))
@@ -27,35 +37,22 @@ function App() {
     }
 
     setNumber({ value: value })
+    setErrorMessage('')
     setIsDisabled(false)
   }
 
-  const handleKeyPress = (e: { keyCode: number; which: number }) => {
-    if (e.keyCode === 13 || e.which === 13) {
-      checkPrimeHandle()
-    }
-  }
-
   const checkPrimeHandle = () => {
-    if (previousSearch.find((element) => element.value === number.value)) {
-      return alert(
-        'You have already inserted this number, please check the history log'
-      )
-    }
-
+    let isPrime = true
     for (let i = 2; i < number.value; i++) {
       if (number.value % i == 0) {
-        setPreviousSearch((prev) => [
-          ...prev,
-          { value: number.value, isPrime: false },
-        ])
-        return
+        isPrime = false
       }
 
       setPreviousSearch((prev) => [
         ...prev,
-        { value: number.value, isPrime: true },
+        { value: number.value, isPrime: isPrime },
       ])
+      setIsDisabled(true)
       return
     }
   }
